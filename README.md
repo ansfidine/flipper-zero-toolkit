@@ -27,8 +27,33 @@ Copy payload_manager.js to: SD Card/apps/Scripts/badusb/
 
 ---
 
-### 2. RF Scanner (C / FAP) — *Coming Soon*
-Custom sub-GHz frequency scanner for analyzing wireless signals.
+### 2. Sub-GHz Easy (C / FAP)
+Easy-to-use sub-GHz scanner by **device category** — no frequency knowledge needed!
+
+**Location:** `apps/subghz/subghz_cn_easy.fap`
+
+**Features:**
+- **Device categories:** Car Remote, Garage Door, Alarm System, Wireless Sensor, Smart Home, E-Scooter, Parking Barrier, LED Controller
+- Auto-scans the correct frequency band for each device type
+- One-tap signal capture + replay
+- Real-time RSSI meter with signal strength bar
+- Works on **Momentum firmware** (API 87.1)
+
+**Target Frequencies (China):**
+- 315 MHz — car remotes, alarms
+- 433 MHz — garage doors, sensors, smart home
+
+**Install:**
+```
+Copy subghz_cn_easy.fap to: SD Card/apps/
+```
+
+**Usage:**
+1. Run: Apps → Sub-GHz → Sub-GHz Easy
+2. Pick device type (e.g., "Car Remote")
+3. App auto-scans the right frequency band
+4. When signal detected, press OK to capture
+5. Press OK again to replay
 
 ---
 

@@ -1,71 +1,57 @@
-# Sub-GHz CN Pentest Tool
+# Sub-GHz Easy
 
-A sub-GHz scanner, emulator, and analysis tool designed for **Chinese ISM frequencies** on Flipper Zero with **Momentum firmware**.
+**Easy-to-use sub-GHz scanner by device type** — no frequency knowledge needed!
 
-## 🇨🇳 Target Frequencies
+## 🇨🇳 Designed for Chinese Frequencies
 
-| Band | Center Freq | Range | Common Uses in China |
-|------|------------|-------|---------------------|
-| **315 MHz** | 315.000 MHz | 310-320 MHz | Car remotes, alarms, wireless keypads |
-| **433 MHz** | 433.920 MHz | 430-440 MHz | Garage doors, sensors, wireless switches |
+| Category | Auto-Scan Range | Center Freq | Common Uses |
+|----------|----------------|-------------|-------------|
+| 🚗 **Car Remote** | 310-320 MHz | 315 MHz | Car keys, keyless entry |
+| 🚪 **Garage Door** | 430-440 MHz | 433.92 MHz | Garage remotes, gates |
+| 🔔 **Alarm System** | 315-345 MHz | 330 MHz | Home alarms, sirens |
+| 📡 **Wireless Sensor** | 433-435 MHz | 433.92 MHz | Temp/humidity sensors |
+| 🏠 **Smart Home** | 315-440 MHz | 433.92 MHz | Switches, plugs, bulbs |
+| 🛵 **E-Scooter** | 2.4-2.5 GHz | 2.45 GHz | Scooter remotes |
+| 🅿️ **Parking Barrier** | 430-440 MHz | 433.92 MHz | Parking gates |
+| 💡 **LED Controller** | 315-440 MHz | 433.92 MHz | RGB controllers |
 
-## 🎯 Features
+## 🎮 How to Use
 
-### 1. Scan 315 MHz / Scan 433 MHz
-- Sweeps 1 MHz range around center frequency
-- 5 kHz step resolution
-- Real-time RSSI meter with signal strength bar
-- Auto-detection of active signals above -80 dBm threshold
-- Signal counter
-
-### 2. Read Signal
-- Lock onto 433.92 MHz for signal capture
-- Displays real-time RSSI
-- Captures signal metadata for emulation
-
-### 3. Emulate
-- TX burst on captured frequency
-- Simple OOK modulation for replay
-- **For educational/authorized testing only**
-
-### 4. Analyze
-- Protocol detection placeholder
-- Signal statistics display
-
-## 📥 Install
-
-1. Download `subghz_cn_pentest.fap` from Releases
-2. Copy to Flipper: `SD Card/apps/` via qFlipper
-3. Run from Apps → Sub-GHz → Sub-GHz CN
+1. **Pick Device Type** — Choose what you want to scan for (e.g., "Car Remote")
+2. **Auto-Scan** — App scans the correct frequency band automatically
+3. **Signal Detected** — RSSI bar shows signal strength, beep on detection
+4. **Capture** — Press **OK** to capture the signal
+5. **Replay** — Press **OK** again to transmit (authorized testing only!)
 
 ## 🎮 Controls
 
 | Button | Action |
 |--------|--------|
-| **↑/↓** | Navigate menu |
-| **OK** | Select / Transmit |
-| **Back** | Stop scan / Return to menu / Exit |
+| **↑/↓** | Navigate categories |
+| **OK** | Select / Capture / Replay |
+| **Back** | Stop scan / Go back / Exit |
 
 ## ⚠️ Legal Notice
 
-This tool is for **authorized security testing and educational purposes only**. In China, transmitting on ISM bands without proper authorization may violate regulations. Always:
+This tool is for **authorized security testing and educational purposes only**. In China, ISM band transmission requires proper authorization. Always:
 - Obtain permission before testing
 - Do not interfere with emergency or licensed services
 - Use only in controlled environments
 
-## 🔧 Technical Details
+## 🔧 Technical Specs
 
 - **Modulation**: OOK (On-Off Keying), AM_650 preset
-- **Hardware Path**: Automatic switching (315/433/868)
-- **API Level**: 87.1 (Momentum compatible)
-- **Stack**: 4KB
+- **Scan Step**: 25 kHz (fast sweep)
+- **RSSI Threshold**: -75 dBm
+- **Hardware**: Auto path switching (315/433/868)
+- **Firmware**: Momentum compatible (API 87.1)
 
-## 🏗️ Future Enhancements
+## 🏗️ Future Upgrades
 
-- PT2262 / EV1527 protocol decoding
-- Rolling code detection
 - Raw signal recording to SD card
-- Brute-force packet replay
+- Signal library / saved captures
+- PT2262 / EV1527 protocol detection
+- Brute-force replay patterns
 - Frequency hopping analysis
 
 ---
