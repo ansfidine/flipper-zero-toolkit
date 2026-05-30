@@ -6,6 +6,14 @@
 
 #define TAG "SubGhzPentestTransmit"
 
+/* ── OK button callback: transmit signal ──────────────────────────────── */
+static void transmit_ok_callback(GuiButtonType result, InputType type, void* context) {
+    UNUSED(result);
+    UNUSED(type);
+    SubGhzPentestApp* app = context;
+    view_dispatcher_send_custom_event(app->view_dispatcher, SubGhzPentestCustomEventReplaySignal);
+}
+
 /* ── Transmit scene: replay a captured signal ──────────────────────────── */
 
 static void transmit_update_widget(SubGhzPentestApp* app, bool transmitting) {
@@ -55,8 +63,8 @@ static void transmit_update_widget(SubGhzPentestApp* app, bool transmitting) {
         }
         furi_string_free(info_str);
 
-        widget_add_string_element(
-            app->widget, 64, 54, AlignCenter, AlignTop, FontSecondary, "OK=Send  Back=Cancel");
+        widget_add_button_element(
+            app->widget, GuiButtonTypeCenter, "Send", transmit_ok_callback, app);
     }
 }
 

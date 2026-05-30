@@ -8,6 +8,16 @@
 
 /* ── Capture mode: listen on a frequency and decode protocols ──────────── */
 
+/* OK button callback: save current capture */
+static void capture_mode_save_callback(GuiButtonType result, InputType type, void* context) {
+    UNUSED(result);
+    UNUSED(type);
+    SubGhzPentestApp* app = context;
+    view_dispatcher_send_custom_event(app->view_dispatcher, SubGhzPentestCustomEventSaveSignal);
+}
+
+/* Back button not needed - handled by scene_manager navigation */
+
 static void capture_mode_update_widget(SubGhzPentestApp* app) {
     widget_reset(app->widget);
 
@@ -54,8 +64,8 @@ static void capture_mode_update_widget(SubGhzPentestApp* app) {
             widget_add_string_element(
                 app->widget, 64, 36, AlignCenter, AlignTop, FontSecondary, buf);
         }
-        widget_add_string_element(
-            app->widget, 64, 52, AlignCenter, AlignTop, FontSecondary, "OK=Save  Back=Stop");
+        widget_add_button_element(
+            app->widget, GuiButtonTypeCenter, "Save", capture_mode_save_callback, app);
         break;
 
     case CaptureStateError:

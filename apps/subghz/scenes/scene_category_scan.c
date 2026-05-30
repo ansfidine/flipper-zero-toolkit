@@ -4,11 +4,23 @@
 #include <furi.h>
 #include <furi_hal_subghz.h>
 #include <gui/modules/widget.h>
+#include <input/input.h>
 
 /* ── Category scan: auto-sweep range via WORKER THREAD (v0.4.0) ──────── */
 /* All radio ops now happen on SubGhzPentestWorker thread, not UI thread.
  * The UI tick only reads shared state (current_freq, current_rssi) and
- * updates the widget. No blocking SPI calls on UI thread anymore. */
+ * updates the widget. No blocking SPI calls on UI thread anymore.
+ *
+ * v0.5.0: OK button now enters Capture Mode on best frequency.
+ * Button label changes based on scanner state. */
+
+/* ── OK button callback: enter capture mode ─────────────────────────────── */
+static void category_scan_ok_callback(GuiButtonType result, InputType type, void* context) {
+    UNUSED(result);
+    UNUSED(type);
+    SubGhzPentestApp* app = context;
+    view_dispatcher_send_custom_event(app->view_dispatcher, SubGhzPentestCustomEventCaptureSignal);
+}
 
 static void category_scan_update_widget(SubGhzPentestApp* app) {
     const SubGhzPentestSweepConfig* cfg = &app->sweep_configs[app->active_category];
@@ -69,9 +81,17 @@ static void category_scan_update_widget(SubGhzPentestApp* app) {
         widget_add_string_element(app->widget, 0, 43, AlignLeft, AlignTop, FontSecondary, "STOPPED");
     }
 
-    /* Controls hint */
-    widget_add_string_element(
-        app->widget, 0, 55, AlignLeft, AlignTop, FontSecondary, "OK=Stop BACK=Back");
+    /* Controls: OK button enters capture mode */
+    if(app->scanner_running) {
+        widget_add_button_element(
+            app->widget, GuiButtonTypeCenter, "Capture", category_scan_ok_callback, app);
+    } else if(app->best_freq > 0) {
+        widget_add_button_element(
+            app->widget, GuiButtonTypeCenter, "Capture", category_scan_ok_callback, app);
+    } else {
+        widget_add_string_element(
+            app->widget, 0, 55, AlignLeft, AlignTop, FontSecondary, "Scanning...");
+    }
 }
 
 /* Worker callback: called from worker thread to notify UI of new data.
@@ -114,11 +134,17 @@ bool subghz_pentest_scene_category_scan_on_event(void* context, SceneManagerEven
 
     if(event.type == SceneManagerEventTypeCustom) {
         switch(event.event) {
-        case SubGhzPentestScannerEventStop:
-            /* Stop the worker thread */
-            subghz_pentest_worker_stop(app->worker);
-            app->scanner_running = false;
-            category_scan_update_widget(app);
+        case SubGhzPentestCustomEventCaptureSignal:
+            /* If scanning, stop scanner and enter capture mode on best frequency */
+            if(app->scanner_running) {
+                subghz_pentest_worker_stop(app->worker);
+                app->scanner_running = false;
+            }
+            /* Enter capture mode on best frequency or current frequency */
+            if(app->best_freq > 0) {
+                app->current_freq = app->best_freq;
+            }
+            scene_manager_next_scene(app->scene_manager, SubGhzPentestSceneCaptureMode);
             return true;
         default:
             break;
