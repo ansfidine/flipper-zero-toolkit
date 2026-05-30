@@ -304,6 +304,24 @@ static uint8_t badusb_scan_payloads(BadUsbApp* app) {
     return app->payload_count;
 }
 
+/* Submenu callback: route item index as custom event */
+static void badusb_submenu_callback(void* context, uint32_t index) {
+    furi_assert(context);
+    BadUsbApp* app = context;
+    view_dispatcher_send_custom_event(app->view_dispatcher, index);
+}
+
+/* Dialog result callback: route confirm/cancel as custom events */
+static void badusb_dialog_result_callback(DialogExResult result, void* context) {
+    furi_assert(context);
+    BadUsbApp* app = context;
+    if(result == DialogExResultRight) {
+        view_dispatcher_send_custom_event(app->view_dispatcher, BadUsbEventConfirmOk);
+    } else if(result == DialogExResultLeft) {
+        view_dispatcher_send_custom_event(app->view_dispatcher, BadUsbEventConfirmCancel);
+    }
+}
+
 /* ── Scene handlers ─────────────────────────────────────────────────── */
 
 /* ── Menu scene ─────────────────────────────────────────────────────── */
@@ -312,8 +330,8 @@ void badusb_scene_menu_on_enter(void* context) {
     submenu_reset(app->submenu);
     submenu_set_header(app->submenu, "BadUSB Manager v1.0");
 
-    submenu_add_item(app->submenu, "Run Payload", 0, NULL, NULL);
-    submenu_add_item(app->submenu, "About", 1, NULL, NULL);
+    submenu_add_item(app->submenu, "Run Payload", 0, badusb_submenu_callback, app);
+    submenu_add_item(app->submenu, "About", 1, badusb_submenu_callback, app);
 
     view_dispatcher_switch_to_view(app->view_dispatcher, BadUsbViewSubmenu);
 }
@@ -350,7 +368,7 @@ void badusb_scene_payload_list_on_enter(void* context) {
         submenu_add_item(app->submenu, "Add .txt to /badusb/", 1, NULL, NULL);
     } else {
         for(uint8_t i = 0; i < app->payload_count; i++) {
-            submenu_add_item(app->submenu, app->payloads[i].name, i, NULL, NULL);
+        submenu_add_item(app->submenu, app->payloads[i].name, i, badusb_submenu_callback, app);
         }
     }
 
@@ -383,7 +401,7 @@ void badusb_scene_confirm_on_enter(void* context) {
                        AlignCenter, AlignCenter);
     dialog_ex_set_left_button_text(app->dialog_ex, "Cancel");
     dialog_ex_set_right_button_text(app->dialog_ex, "Run");
-    dialog_ex_set_result_callback(app->dialog_ex, NULL);
+    dialog_ex_set_result_callback(app->dialog_ex, badusb_dialog_result_callback);
     view_dispatcher_switch_to_view(app->view_dispatcher, BadUsbViewDialogEx);
 }
 
