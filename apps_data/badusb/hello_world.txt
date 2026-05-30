@@ -1,0 +1,6 @@
+REM Hello World — simple text typing test
+STRING Hello World from BadUSB Manager!
+ENTER
+DELAY 100
+STRING This proves the payload system works.
+ENTER
