@@ -1,9 +1,12 @@
 REM Hello World Demo
-REM Types a simple message in Notepad
+REM Opens Notepad and types a message
 DELAY 1000
-STRING notepad
+GUI r
 DELAY 500
+STRING notepad
+DELAY 300
 ENTER
-DELAY 1000
-STRING Hello World from Flipper Zero!
+DELAY 500
+STRING Hello from Flipper Zero BadUSB Manager!
 ENTER
+STRING Built for Momentum firmware.

@@ -1,0 +1,9 @@
+App(
+    appid="badusb_manager",
+    name="BadUSB Manager",
+    apptype=FlipperAppType.EXTERNAL,
+    entry_point="badusb_manager_app",
+    requires=["gui", "storage"],
+    stack_size=4 * 1024,
+    fap_category="USB",
+)

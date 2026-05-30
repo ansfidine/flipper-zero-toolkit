@@ -1,0 +1,8 @@
+REM Lock screen bypass demo — Windows
+REM Opens lock screen via Ctrl+Alt+Del then Space
+DELAY 1000
+CTRL ALT DELETE
+DELAY 500
+ESC
+DELAY 200
+ESC
