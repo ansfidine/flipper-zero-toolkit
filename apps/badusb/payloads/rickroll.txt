@@ -1,0 +1,5 @@
+REM Rickroll - opens browser and plays Never Gonna Give You Up
+DELAY 1000
+STRING chrome https://www.youtube.com/watch?v=dQw4w9WgXcQ
+DELAY 500
+ENTER

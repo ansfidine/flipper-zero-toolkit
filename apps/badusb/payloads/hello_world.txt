@@ -1,0 +1,9 @@
+REM Hello World Demo
+REM Types a simple message in Notepad
+DELAY 1000
+STRING notepad
+DELAY 500
+ENTER
+DELAY 1000
+STRING Hello World from Flipper Zero!
+ENTER
