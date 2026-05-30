@@ -1,0 +1,10 @@
+App(
+    appid="gpio_sensor_bridge",
+    name="GPIO Sensor Bridge",
+    apptype=FlipperAppType.EXTERNAL,
+    entry_point="gpio_sensor_bridge_app",
+    requires=["gui"],
+    stack_size=2 * 1024,
+    icon="images/icon_10x10.png",
+    order=100,
+)
