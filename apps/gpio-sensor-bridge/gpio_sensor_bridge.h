@@ -4,6 +4,7 @@
 #include <gui/view_dispatcher.h>
 #include <gui/modules/submenu.h>
 #include <gui/modules/widget.h>
+#include <expansion/expansion.h>
 
 /* View IDs for ViewDispatcher */
 typedef enum {
@@ -33,6 +34,7 @@ typedef struct {
     ViewDispatcher* view_dispatcher;
     Submenu* submenu;
     Widget* widget;
+    Expansion* expansion;
 } GpioSensorBridgeApp;
 
 /* Menu scene — embedded in main .c for M1 */

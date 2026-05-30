@@ -1,0 +1,11 @@
+App(
+    appid="subghz_pentest",
+    name="Sub-GHz Pentest",
+    apptype=FlipperAppType.EXTERNAL,
+    entry_point="subghz_pentest_app",
+    requires=["gui", "subghz"],
+    stack_size=4 * 1024,
+    fap_category="Sub-GHz",
+    fap_icon="subghz_pentest.png",
+    fap_icon_assets="images",
+)

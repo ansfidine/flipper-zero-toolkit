@@ -8,6 +8,7 @@
 #include <gui/scene_manager.h>
 #include <gui/view_dispatcher.h>
 #include <gui/view.h>
+#include <expansion/expansion.h>
 
 /* ── Scene handlers table ──────────────────────────────────────────────── */
 
@@ -98,6 +99,10 @@ void gpio_sensor_bridge_scene_menu_on_exit(void* context) {
 static GpioSensorBridgeApp* gpio_sensor_bridge_app_alloc(void) {
     GpioSensorBridgeApp* app = malloc(sizeof(GpioSensorBridgeApp));
 
+    /* Disable expansion protocol to avoid GPIO pin conflicts */
+    app->expansion = furi_record_open(RECORD_EXPANSION);
+    expansion_disable(app->expansion);
+
     app->scene_manager = scene_manager_alloc(&scene_manager_handlers, app);
     app->view_dispatcher = view_dispatcher_alloc();
 
@@ -124,6 +129,10 @@ static void gpio_sensor_bridge_app_free(GpioSensorBridgeApp* app) {
     submenu_free(app->submenu);
     view_dispatcher_free(app->view_dispatcher);
     scene_manager_free(app->scene_manager);
+
+    /* Re-enable expansion protocol on cleanup */
+    expansion_enable(app->expansion);
+    furi_record_close(RECORD_EXPANSION);
 
     free(app);
 }
