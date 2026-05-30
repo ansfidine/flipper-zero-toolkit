@@ -1,0 +1,13 @@
+REM Windows Notepad smoke test
+REM Author: Ansfidine Youssouf
+DELAY 1000
+GUI r
+DELAY 500
+STRING notepad
+ENTER
+DELAY 800
+STRING Hello from Ansfidine Youssouf — Flipper BadUSB payload test.
+ENTER
+ENTER
+STRING Windows payload executed successfully.
+ENTER

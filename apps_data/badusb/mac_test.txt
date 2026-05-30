@@ -1,0 +1,13 @@
+REM Mac TextEdit smoke test
+REM Author: Ansfidine Youssouf
+DELAY 1000
+COMMAND SPACE
+DELAY 500
+STRING TextEdit
+ENTER
+DELAY 1200
+STRING Hello from Ansfidine Youssouf — Mac BadUSB payload test.
+ENTER
+ENTER
+STRING Mac payload executed successfully.
+ENTER
