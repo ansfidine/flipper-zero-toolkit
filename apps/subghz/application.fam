@@ -3,7 +3,7 @@ App(
     name="Sub-GHz Pentest",
     apptype=FlipperAppType.EXTERNAL,
     entry_point="subghz_pentest_app",
-    requires=["gui", "subghz"],
+    requires=["gui", "subghz", "storage"],
     stack_size=4 * 1024,
     fap_category="Sub-GHz",
     fap_icon="subghz_pentest.png",
