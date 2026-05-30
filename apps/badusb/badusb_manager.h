@@ -20,7 +20,7 @@
 /* Max line length for DuckyScript parsing */
 #define BADUSB_MAX_LINE_LEN 512
 /* Payload directory on SD card */
-#define BADUSB_PAYLOAD_DIR EXT_PATH("/badusb")
+#define BADUSB_PAYLOAD_DIR EXT_PATH("apps_data/badusb")
 /* Default keyboard layout for Momentum */
 #define BADUSB_LAYOUT_PATH EXT_PATH("/badusb/assets/en-us.kl")
 

@@ -1,9 +1,0 @@
-REM Chinese frequency info — types the allowed ISM bands
-STRING Chinese Sub-GHz ISM frequencies:
-ENTER
-STRING 315 MHz — car remotes, garage doors
-ENTER
-STRING 433.92 MHz — alarm sensors, wireless switches
-ENTER
-STRING 868 MHz — international remotes in China
-ENTER
