@@ -6,6 +6,4 @@ App(
     requires=["gui", "subghz", "storage"],
     stack_size=4 * 1024,
     fap_category="Sub-GHz",
-    fap_icon="subghz_pentest.png",
-    fap_icon_assets="images",
 )
