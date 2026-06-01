@@ -1,5 +1,5 @@
 #include "scene_about.h"
-#include "../gpio_sensor_bridge.h"
+#include "gpio_sensor_bridge.h"
 
 #include <furi.h>
 #include <gui/modules/widget.h>

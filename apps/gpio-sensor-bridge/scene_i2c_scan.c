@@ -1,5 +1,5 @@
 #include "scene_i2c_scan.h"
-#include "../gpio_sensor_bridge.h"
+#include "gpio_sensor_bridge.h"
 
 #include <furi.h>
 #include <furi_hal_i2c.h>

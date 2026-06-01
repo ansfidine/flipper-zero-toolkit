@@ -437,8 +437,8 @@ void badusb_scene_running_on_enter(void* context) {
     /* Switch to HID mode and execute */
     furi_hal_usb_unlock();
     furi_hal_usb_set_config(&usb_hid, &((FuriHalUsbHidConfig){
-        .vid = app->vid ?: HID_VID_DEFAULT,
-        .pid = app->pid ?: HID_PID_DEFAULT,
+        .vid = app->vid ?: 0x046D,
+        .pid = app->pid ?: 0xC52B,
         .manuf = "Logitech",
         .product = "USB Receiver",
     }));
@@ -545,8 +545,8 @@ int32_t badusb_manager_app(void* p) {
     UNUSED(p);
 
     BadUsbApp* app = malloc(sizeof(BadUsbApp));
-    app->vid = HID_VID_DEFAULT;
-    app->pid = HID_PID_DEFAULT;
+    app->vid = 0x046D; // Logitech default
+    app->pid = 0xC52B; // Logitech Unifying Receiver default
 
     /* Setup view dispatcher */
     app->gui = furi_record_open(RECORD_GUI);
